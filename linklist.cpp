@@ -1,0 +1,282 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+//creating a class that will hold a data and a pointer to the next node
+
+class node
+{
+
+public:
+
+    int data;
+    node* nxt;
+
+
+
+
+};
+
+
+class linkedList
+{
+
+
+public:
+
+    node* head;
+
+
+    linkedList()
+    {
+        head=NULL;
+
+
+    }
+
+
+
+    //creating a new node
+
+
+    node* createANewNode(int val)
+    {
+        node* a=new node;
+
+
+        a->data=val;
+
+        a->nxt=NULL;
+
+
+        return a;
+    }
+
+    //inserting a value at head
+
+    void insertAValueAtHead(int val)
+    {
+        node* a=createANewNode(val);
+
+        if(head==NULL)
+        {
+
+            head=a;
+            return ;
+        }
+
+
+        a->nxt=head;
+
+        head=a;
+
+    }
+
+
+    // traversing the whole linked list
+
+    void traverse()
+    {
+        if(head==NULL)
+        {
+            cout<<"No value to show\n";
+            return ;
+        }
+
+
+        node* a=head;
+
+        while(a!=NULL)
+        {
+            cout<<a->data<<" ";
+
+            a=a->nxt;
+
+        }
+
+
+
+    }
+
+
+    // using recursion and a leap of faith to print the linked list in reverse order
+
+
+    void reverse2(node* a)
+    {
+        if(a== NULL)
+        {
+            return ;
+        }
+
+        reverse2(a->nxt);
+
+        cout<<a->data<<" ";
+    }
+
+
+
+
+    void reverse()
+    {
+        reverse2(head);
+
+    }
+
+
+    //inserting a value after an index given by the user
+
+
+
+
+    void insertAtAnIndex(int data,int idx)
+    {
+
+        if(idx==0)
+        {
+            insertAValueAtHead(data);
+            return ;
+        }
+
+        int current_idx=0;
+
+        node* a=head;
+
+        while(current_idx!=idx-1)
+        {
+            a=a->nxt;
+
+            current_idx++;
+        }
+
+
+
+        node* b=createANewNode(data);
+
+        b->nxt=a->nxt;
+
+        a->nxt=b;
+
+
+
+
+
+    }
+
+
+
+
+
+
+    //deleting a value from the head
+
+    void deleteAtHead()
+    {
+        if(head==NULL)
+        {
+            cout<<"NO value to delete\n";
+
+            return ;
+        }
+
+
+        node* a=head;
+
+        head=a->nxt;
+
+        delete a;
+
+    }
+
+
+    //deleting a value from a random index
+
+
+    void deleteAtAnyIndex(int idx)
+    {
+        if(idx==0)
+        {
+            deleteAtHead();
+            return ;
+        }
+
+
+        node* a=head;
+
+        int curr_idx=0;
+
+        while(curr_idx!=idx-1)
+        {
+            a=a->nxt;
+            curr_idx++;
+
+        }
+
+        node*b =a->nxt;
+
+        a->nxt=b->nxt;
+
+        delete b;
+
+
+
+
+
+    }
+
+
+
+
+};
+
+
+
+int main()
+{
+
+    linkedList ll;
+    ll.insertAValueAtHead(5);
+    ll.insertAValueAtHead(6);
+    ll.insertAValueAtHead(7);
+    ll.insertAValueAtHead(8);
+    ll.insertAValueAtHead(9);
+    ll.insertAValueAtHead(10);
+
+
+
+    ll.traverse();
+
+    cout<<endl;
+
+
+    cout<<"the reverse of the linked list is--> "<<endl;
+
+    ll.reverse();
+
+    cout<<endl;
+
+    ll.insertAtAnIndex(23,2);
+
+    cout<<"the new linked list after an insertion is--> "<<endl;
+
+    ll.traverse();
+
+    cout<<endl;
+
+    cout<<"the new linked list after head deletion is--> "<<endl;
+
+    ll.deleteAtHead();
+
+    ll.traverse();
+
+    ll.deleteAtAnyIndex(2);
+
+    cout<<endl;
+
+    cout<<"the new linked list after any random index deletion is--> "<<endl;
+
+    ll.traverse();
+
+    return 0;
+
+}
